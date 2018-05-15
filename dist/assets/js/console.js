@@ -1,0 +1,1 @@
+console.log("Hi"),console.log("你好"),console.log("Hello World");var CalcAdd=function(o,l){return o+l};

@@ -1,0 +1,17 @@
+$primary-color:#123456;
+$p-color:blue;
+$title-color:green;
+body {
+    background: $primary-color;
+    color: $p-color;
+}
+
+img {
+    border-radius: 50%;
+    background: linear-gradient( $primary-color, #666);
+}
+
+h1,
+h2 {
+    color: $title-color
+}
