@@ -1,71 +1,62 @@
 const
     gulp = require('gulp'),
-    // JS Minify Start
+    // JS Minify 
     pump = require('pump'),
     uglify = require('gulp-uglify'),
-    // JS Minify End
 
-    // JS Check Start
+    // JS Check 
     jshint = require('gulp-jshint'),
-    // JS Check End
 
-    // SCSS Compiler to CSS Start
+    // SCSS Compiler to CSS 
     sass = require('gulp-sass'),
-    // SCSS Compiler to CSS End
 
-    // CSS Minify Start
+    // CSS Minify 
     cleanCSS = require('gulp-clean-css'),
-    // CSS Minify End
 
-    // HTML Minify Start
+    // HTML Minify 
     htmlmin = require('gulp-htmlmin'),
-    // HTML Minify End
 
-    // CSS Auto Prefix Start
+    // CSS Auto Prefix
     autoprefixer = require('gulp-autoprefixer'),
-    // CSS Auto Prefix End
 
-    // Image Minify Start
+    // Image Minify 
     imagemin = require('gulp-imagemin'),
-    // Image Minify Start
 
-    // Livereload Start
+    // Livereload 
     connect = require('gulp-connect'),
     livereload = require('gulp-livereload')
 
-// Livereload End
 
 gulp.task('sass', function () {
-    return gulp.src('css/*.scss')
+    return gulp.src('workspace/assets/css/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['last 5 versions'],
             cascade: false
         }))
         .pipe(cleanCSS())
+        .pipe(gulp.dest('workspace/assets/css'))
         .pipe(gulp.dest('dist/assets/css'))
         .pipe(connect.reload());
 });
 
 gulp.task('lint', function () {
-    return gulp.src('js/*.js')
+    return gulp.src('workspace/assets/js/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('minify-js', function (cb) {
     pump([
-                gulp.src('js/*.js'),
-                uglify(),
-                gulp.dest('dist/assets/js')
-            ],
-            cb
-        )
+            gulp.src('workspace/assets/js/*.js'),
+            uglify(),
+            gulp.dest('dist/assets/js')
+        ], cb)
         .pipe(connect.reload())
 });
 
 gulp.task('minify-html', function () {
-    return gulp.src('*.html')
+    return gulp.src('workspace/*.html')
         .pipe(htmlmin({
             collapseWhitespace: true
         }))
@@ -75,47 +66,56 @@ gulp.task('minify-html', function () {
 
 
 gulp.task('minify-css', () => {
-    return gulp.src('css/*.css')
+    return gulp.src('workspace/css/*.css')
         .pipe(cleanCSS())
+        .pipe(autoprefixer({
+            browsers: ['last 5 versions'],
+            cascade: false
+        }))
         .pipe(gulp.dest('dist/assets/css'));
 });
 
 gulp.task('minify-image', () =>
-    gulp.src('images/*')
+    gulp.src('workspace/assets/imgs/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('dist/assets/images'))
+    .pipe(gulp.dest('dist/assets/imgs'))
     .pipe(connect.reload())
 );
 
-gulp.task('autoprefixer', () =>
-    gulp.src('assets/*.css')
-    .pipe(autoprefixer({
-        browsers: ['last 2 versions'],
-        cascade: false
-    }))
-    .pipe(gulp.dest('dist/prefix'))
-);
+gulp.task('copy', function () {
+    return gulp.src('src/assets/fonts/*.*')
+        .pipe(gulp.dest('dist/assets/fonts'))
+});
 
-gulp.task('connect', function () {
+gulp.task('fonts', function () {
+    gulp.src('workspace/assets/fonts/*.*')
+        .pipe(gulp.dest('dist/assets/fonts'));
+})
+
+gulp.task('dev', function () {
     connect.server({
-        root: 'dist',
+        name: 'Dev App',
+        root: 'workspace',
+        port: 8080,
         livereload: true
     });
 });
-// gulp.task('html', function () {
-//     gulp.src('*.html')
-//         .pipe(connect.reload());
-// });
+
+gulp.task('prod', function () {
+    connect.server({
+        name: 'Prod App',
+        root: 'dist',
+        port: 8081,
+        livereload: true
+    });
+});
 
 gulp.task('watch', function () {
-    gulp.watch(['*.html'], ['minify-html'])
-    gulp.watch(['css/*.scss'], ['sass'])
-    gulp.watch(['js/*.js'], ['minify-js'])
-    // gulp.watch(['assets/images/*.*'], ['minify-image'])
+    gulp.watch(['workspace/*.html'], ['minify-html'])
+    gulp.watch(['workspace/assets/css/*.scss'], ['sass'])
+    gulp.watch(['workspace/assets/js/*.js'], ['minify-js'])
+    gulp.watch(['workspace/assets/imgs/*.*'], ['minify-image'])
 
 });
 
-gulp.task('livereload', ['connect', 'watch']);
-gulp.task('run-all-task', ["sass", "lint", "minify-js", "minify-html", "connect", "html", "watch"]);
-
-gulp.task('default', ["sass", "lint", "minify-js", "minify-html", "minify-image", "connect", "watch"])
+gulp.task('default', ["sass", "lint", "minify-js", "minify-html", "minify-image", "fonts", "prod", "dev", "watch"])
