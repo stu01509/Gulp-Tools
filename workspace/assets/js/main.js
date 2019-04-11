@@ -1,6 +1,1 @@
-$(function () {
-    $('.items .item').imgLiquid();
-})
-$(function () {
-    $('.photos .image').imgLiquid();
-})
+console.log('Success');

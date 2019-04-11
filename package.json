@@ -1,5 +1,5 @@
 {
-  "name": "gulp",
+  "name": "gulp-tools",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-clean-css": "^3.10.0",
     "gulp-connect": "^5.7.0",
