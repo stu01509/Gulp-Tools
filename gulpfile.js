@@ -113,12 +113,20 @@ gulp.task('prod', function () {
 
 gulp.task('watch', function () {
     gulp.watch(['workspace/*.html'], ['minify-html'])
+<<<<<<< HEAD
     // gulp.watch(['workspace/assets/css/*.scss'], ['sass'])
+=======
+    gulp.watch(['workspace/assets/css/*.scss'], ['sass'])
+>>>>>>> 1a5983cd8f3d88facd491c24fb96fe16e302fa0b
     gulp.watch(['workspace/assets/css/*.css'], ['minify-css'])
     gulp.watch(['workspace/assets/js/*.js'], ['minify-js'])
     gulp.watch(['workspace/assets/imgs/*.*'], ['minify-image'])
 
 });
 
+<<<<<<< HEAD
 gulp.task('default', ["lint", "minify-js", 'minify-css', "minify-html", "minify-image", "fonts", "prod", "dev", "watch"]);
 // gulp.task('sass', ["sass", "lint", "minify-js", 'minify-css', "minify-html", "minify-image", "fonts", "prod", "dev", "watch"]);
+=======
+gulp.task('default', ["sass", "lint", "minify-js", 'minify-css', "minify-html", "minify-image", "fonts", "prod", "dev", "watch"])
+>>>>>>> 1a5983cd8f3d88facd491c24fb96fe16e302fa0b
