@@ -2,12 +2,12 @@
   "name": "gulp-tools",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "gulp.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "stu01509",
+  "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
@@ -16,7 +16,6 @@
     "gulp-htmlmin": "^4.0.0",
     "gulp-imagemin": "^4.1.0",
     "gulp-jshint": "^2.1.0",
-    "gulp-livereload": "^3.8.1",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.1",
     "jshint": "^2.9.7",
