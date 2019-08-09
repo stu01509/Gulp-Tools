@@ -2,7 +2,7 @@ const
     gulp = require('gulp'),
     // JS Minify 
     pump = require('pump'),
-    uglify = require('gulp-uglify'),
+    uglify = require('gulp-uglify-es').default,
     // JS Check 
     jshint = require('gulp-jshint'),
     // SCSS Compiler to CSS 
