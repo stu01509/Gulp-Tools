@@ -17,7 +17,7 @@
     "gulp-imagemin": "^4.1.0",
     "gulp-jshint": "^2.1.0",
     "gulp-sass": "^4.0.2",
-    "gulp-uglify": "^3.0.1",
+    "gulp-uglify-es": "^1.0.4",
     "jshint": "^2.9.7",
     "jshint-stylish": "^2.2.1",
     "pump": "^3.0.0"
